@@ -4,14 +4,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 //Componentes
-import Home from './src/home/Home'
+import Home from './src/Home/Home'
 import ShoppingCart from './src/ShoppingCart/ShoppingCart'
 
 
 
 const Stack = createStackNavigator();
 
-export default function Routes() {
+export default function App() {
 
   return (
     <NavigationContainer>
