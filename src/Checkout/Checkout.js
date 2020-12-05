@@ -13,13 +13,11 @@ class Checkout extends React.Component{
         }
     }
 
-    componentWillMount(){
-
+    componentDidMount(){
+        //Calcula o preço subtotal dos produtos ao montar o component checkout.
         this.calculatorSubTotalPrice();
-        // //Calcula o preço total dos produtos do carrinho.
-        // this.calculatorTotalPrice();
-        // //Calcula o preço do frete
-        // this.calculatorShippping();
+        //Calcula o preço total dos produtos ao montar o component checkout.
+        this.calculatorTotalPrice();
     }
 
     calculatorSubTotalPrice(){
@@ -28,56 +26,24 @@ class Checkout extends React.Component{
         cartAux.map(product => {
             product.subTotalPrice = product.quantity * product.price;
         })
-        console.log(cartAux);
+        //Atualiza o carrinho com os produtos atualizados
+        this.setState({
+            cart: cartAux
+        })
+    }
+    calculatorTotalPrice(){
+        //Produto auxiliar recebe uma cópia de produtos
+        let cartAux = this.state.cart.slice();
+        let totalPriceAux = 0;
+        cartAux.map(product => {
+            totalPriceAux+= product.subTotalPrice;
+        })
+        //Atualiza o preço total do carrinho
+        this.setState({
+            totalPrice: totalPriceAux
+        })
     }
 
-
-
-    // calculatorTotalPrice(){
-    //     //Carrinho auxiliar recebe uma cópia de carrinho.
-    //     let cartAux = this.state.cart.slice();
-    //     let totalPriceAux = 0;
-    //     //Soma o subtotal dos produtos do carrinho.
-    //     cartAux.map(product => {
-    //         totalPriceAux += product.subTotalPrice
-    //     })
-    //     //Salva o preço total com os dados atualizados.
-    //     this.setState({
-    //         totalPrice: totalPriceAux
-    //     })
-    // }
-
-    // calculatorShippping(){
-    //     //Carrinho auxiliar recebe uma cópia de carrinho.
-    //     let cartAux = this.state.cart.slice();
-    //     let totalPriceAux = this.state.totalPrice;
-    //     let shippingAux = 0;
-    //     //Se o preço total for acima de 250, o frente é gratis.
-    //     if(totalPriceAux > 250){
-    //         shippingAux = 0;
-    //     }else{
-    //         //Caso contrário, soma 10,00 ao frente por cada produto adicionado.
-    //         shippingAux = cartAux.length() * 10;
-    //     }
-    //     //Salva o valor do frete com os dados atualizados.
-    //     this.setState({
-    //         shipping: shippingAux
-    //     })
-    // }
-
-    // removeProductCart(product){
-    //     //Carrinho auxiliar recebe uma cópia de carrinho.
-    //     let cartAux = this.state.cart.slice();
-    //     let index = cartAux.indexOf(product);
-    //     //Remove o produto do carrinho
-    //     cartAux.splice(index, 1);
-    //     //Salva o carrinho auxiliar com o produto removido;
-    //     this.setState({
-    //         cart: cartAux
-    //     })
-    //     //Recalcula o preço total
-    //     this.calculatorTotalPrice();
-    // }
 
     render(){
         return(
@@ -88,6 +54,10 @@ class Checkout extends React.Component{
                                     <Product product={product}/>
                             )}
                         </View>
+                        <View>
+                            <Text>{this.state.totalPrice}</Text>
+                        </View>
+                        
                 </ScrollView>
             </View>
         )
