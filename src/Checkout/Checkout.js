@@ -50,6 +50,20 @@ class Checkout extends React.Component{
         })
     }
 
+    removeProductCart(product){
+        //Carrinho auxiliar recebe uma cópia de carrinho.
+        let cartAux = this.state.cart.slice();
+        let index = cartAux.indexOf(product);
+        //Remove o produto do carrinho
+        cartAux.splice(index, 1);
+        //Salva o carrinho auxiliar com o produto removido;
+        this.setState({
+            cart: cartAux
+        })
+        //Recalcula o preço total
+        this.calculatorTotalPrice();
+    }
+
     render(){
         return(
             <View>
