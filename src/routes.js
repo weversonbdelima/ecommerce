@@ -4,8 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 //Componentes
-import Home from './src/Home/Home'
-import ShoppingCart from './src/ShoppingCart/ShoppingCart'
+import Shopping from './Shopping/Shopping'
+
 
 
 
@@ -15,9 +15,10 @@ export default function App() {
 
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="ShoppingCart" component={ShoppingCart} />
+        <Stack.Navigator initialRouteName="Shopping">
+          <Stack.Screen name="Shopping" component={Shopping}/>
+
+
         </Stack.Navigator>
     </NavigationContainer>
   );
