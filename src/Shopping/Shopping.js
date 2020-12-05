@@ -109,6 +109,15 @@ class Shopping extends React.Component{
             cart: cartAux
         });
     }
+
+    purchaseProduct(product){
+        //Adiciona o produto ao carrinho
+        this.addProductCart(product);
+        //Redirenciona para a rota de checkout
+        this.props.navigation.navigate('Checkout', {cart: this.state.cart});
+        
+    }
+
     render(){
         return(
             <View>
@@ -135,6 +144,10 @@ class Shopping extends React.Component{
                                     <Button
                                         title="Add to cart"
                                         onPress={()=>this.addProductCart(product)}
+                                    />
+                                    <Button
+                                        title="Purchase"
+                                        onPress={()=>this.purchaseProduct(product)}
                                     />
                                 </View>
                             )}

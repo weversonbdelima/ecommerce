@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 //Componentes
 import Shopping from './Shopping/Shopping'
+import Checkout from './Checkout/Checkout';
 
 
 
@@ -18,7 +19,7 @@ export default function App() {
     <NavigationContainer>
         <Stack.Navigator initialRouteName="Shopping">
           <Stack.Screen name="Shopping" component={Shopping}/>
-
+          <Stack.Screen name="Checkout" component={Checkout}/>
 
         </Stack.Navigator>
     </NavigationContainer>
