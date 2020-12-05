@@ -70,7 +70,7 @@ export default class Home extends Component{
             <View>
                 <Button
                     title="Shopping Cart"
-                    onPress={ () => this.props.navigation.navigate('ShoppingCart', {cart: this.state.cart, totalPrice: this.state.totalPrice})}
+                    onPress={ () => this.props.navigation.navigate('Checkout', {cart: this.state.cart, totalPrice: this.state.totalPrice})}
                 /> 
                 <Text>Product</Text>
                 <ScrollView>
