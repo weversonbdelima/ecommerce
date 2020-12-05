@@ -7,6 +7,9 @@ const styles = StyleSheet.create({
       borderColor: 'gray',
       borderWidth: 1
     },
+    picker:{
+
+    }
   });
 
 export default styles;
