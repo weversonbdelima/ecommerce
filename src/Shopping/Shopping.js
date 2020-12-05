@@ -109,8 +109,6 @@ class Shopping extends React.Component{
             cart: cartAux
         });
     }
-
-
     render(){
         return(
             <View>
