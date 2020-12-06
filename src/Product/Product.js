@@ -5,6 +5,7 @@ import styles from './styles';
 import ShoppingCart from '../ShoppingCart/ShoppingCart'
 
 
+
 export default class Product extends Component{
 
 
@@ -13,6 +14,7 @@ export default class Product extends Component{
         return(
 
             <View style={styles.card}>
+                <Image source={require('../assets/fifa-18.png')}/>
                 <Text>{this.props.product.name}</Text>
                 <Text>{this.props.product.price}</Text>
                 <Text>{this.props.product.score}</Text>

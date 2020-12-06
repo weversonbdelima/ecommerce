@@ -3,21 +3,29 @@ import { View, ScrollView, TextInput,Picker, Button, Text} from 'react-native';
 
 import Product from '../Product/Product'
 
+import cart from '../Classes/Cart'
+
 class Checkout extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            cart: this.props.route.params.cart,
-            totalPrice: 0,
-            shipping: 0
+            cart: cart.getProducts(),
+            totalPrice: cart.getTotalPrice(),
+            shipping: cart.getShipping()
         }
     }
 
     componentDidMount(){
+
+        this.setState({
+            totalPrice: cart.getTotalPrice(),
+            shipping: cart.getShipping()
+        })
+
+
         //Calcula o preço subtotal dos produtos ao montar o component checkout.
         this.calculatorSubTotalPrice();
-        //Calcula o preço total dos produtos ao montar o component checkout.
-        this.calculatorTotalPrice();
+
     }
 
     calculatorSubTotalPrice(){
@@ -31,16 +39,13 @@ class Checkout extends React.Component{
             cart: cartAux
         })
     }
-    calculatorTotalPrice(){
-        //Produto auxiliar recebe uma cópia de produtos
-        let cartAux = this.state.cart.slice();
-        let totalPriceAux = 0;
-        cartAux.map(product => {
-            totalPriceAux+= product.subTotalPrice;
-        })
-        //Atualiza o preço total do carrinho
+
+    //New
+    onPressRemoveProduct(product){
+        //Remove o produto do carrinho
+        cart.removeProduct(product);
         this.setState({
-            totalPrice: totalPriceAux
+            cart: cart.getProducts()
         })
     }
 
@@ -51,14 +56,31 @@ class Checkout extends React.Component{
                 <ScrollView>
                         <View>
                             {this.state.cart.map(product => 
+                                    <View>
                                     <Product product={product}/>
+                                    <Text>{product.quantity}</Text>
+                                    <Text>{product.priceSubTotal}</Text>
+                                    <Button
+                                        title="Add quantity"
+                                        onPress={()=>cart.addQuantity(product)}
+                                    />  
+                                     <Button
+                                        title="Sub quantity"
+                                        onPress={()=>cart.subQuantity(product)}
+                                    />  
+                                    <Button
+                                        title="Delete to cart"
+                                        onPress={()=>this.onPressRemoveProduct(product)}
+                                    />                                    
+                                    </View>
                             )}
                         </View>
-                        <View>
-                            <Text>{this.state.totalPrice}</Text>
-                        </View>
-                        
                 </ScrollView>
+                    <View>
+                        <Text>Shopping details</Text>
+                        <Text>{this.state.totalPrice}</Text>
+                        <Text>{this.state.shipping}</Text>
+                    </View>
             </View>
         )
     }

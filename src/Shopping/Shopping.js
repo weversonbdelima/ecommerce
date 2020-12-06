@@ -4,6 +4,8 @@ import { View, ScrollView, TextInput,Picker, Button} from 'react-native';
 import Products from '../products.json';
 import Product from '../Product/Product'
 
+import cart from '../Classes/Cart'
+
 import styles from './styles'
 import { set } from 'react-native-reanimated';
 
@@ -13,8 +15,7 @@ class Shopping extends React.Component{
         super(props);
         this.state = {
             products: Products,
-            selectedValue: '',
-            cart: []
+            selectedValue: ''
         }
     }
 
@@ -84,35 +85,10 @@ class Shopping extends React.Component{
         })
     }
 
-    addProductCart(product){
-        //Carrinho auxiliar recebe carrinho.
-        let cartAux = this.state.cart.slice();
-        let productAux = [];
-        let index = 0;
-        //Verifica se existe algum elemento correspondente no carrinho
-        if(cartAux.indexOf(product) !== -1){
-            //Caso exista elemento no carrinho, incrementa quantidade do elemento.
-            index = cartAux.indexOf(product);
-            productAux = cartAux[index];
-            productAux.quantity += 1;
-            cartAux[index] = productAux;
-        }else{
-            //Se não existir elemento, insere no carrinho.
-            product.quantity = 1;
-            //Calcula o preço subtotal do produto
-            product.priceSubTotal = product.price;
-            cartAux.push(product);
-        
-        }
-        //Salva o carrinho com os dados atualizados
-        this.setState({
-            cart: cartAux
-        });
-    }
 
     purchaseProduct(product){
         //Adiciona o produto ao carrinho
-        this.addProductCart(product);
+    //    this.addProductCart(product);
         //Redirenciona para a rota de checkout
         this.props.navigation.navigate('Checkout', {cart: this.state.cart});
         
@@ -143,7 +119,7 @@ class Shopping extends React.Component{
                                     <Product product={product}/>
                                     <Button
                                         title="Add to cart"
-                                        onPress={()=>this.addProductCart(product)}
+                                        onPress={()=> cart.setProducts(product)}
                                     />
                                     <Button
                                         title="Purchase"
