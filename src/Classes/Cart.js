@@ -68,25 +68,29 @@ class Cart {
               index = this.products.indexOf(product);
               this.products.splice(index, 1);
            }
-           console.log(this.products)
+
     }
 
     addQuantity(product){
         let index = 0;
+        let priceSubTotalAux = 0;
         //Adiciona quantidade do produto
         index = this.products.indexOf(product);
         this.products[index].quantity++;
-        this.products[index].priceSubTotal+= this.products[index].price;
-        console.log(this.products)
+        priceSubTotalAux = this.products[index].quantity * this.products[index].price;
+        this.products[index].priceSubTotal = priceSubTotalAux.toFixed(2);
+        console.log(this.products[index].quantity)
+        console.log( this.products[index].quantity * this.products[index].price)
     }
     subQuantity(product){
         let index = 0;
+        let priceSubTotalAux = 0;
         index = this.products.indexOf(product);
         //Verifica se a quantidade de produtos e maior que 0, se for subtrai a quantidade.
         if(this.products[index].quantity > 1){
             this.products[index].quantity--;
-            this.products[index].priceSubTotal-= this.products[index].price;
-            console.log(this.products)
+            priceSubTotalAux = this.products[index].quantity * this.products[index].price;
+            this.products[index].priceSubTotal = priceSubTotalAux.toFixed(2);
         }else{
             return;
         }
