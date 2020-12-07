@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, ScrollView, Image, Button } from 'react-native';
-import ProductList from '../products.json'
 import styles from './styles';
+import cart from '../Classes/Cart'
 
 
 export default class Product extends Component{
+
+        constructor(props){
+            super(props);
+        }
 
         //Pré carregamento de imagens do repositório local.
         loadImage(product){
@@ -39,14 +43,48 @@ export default class Product extends Component{
             }
         }
 
+        purchaseProduct(product){
+            //Adiciona o produto ao carrinho
+            cart.setProducts(product);
+            //Redirenciona para a rota de checkout
+            this.props.navigation.navigate('Checkout');
+            
+        }
+
+        loadButtonGroup(){
+            if(!this.props.cart){
+                return (  <View style={styles.buttonGroup}>
+                    <View style={{marginRight: 20}}>
+                    <Button
+                        color="#760DF4"
+                        title="Add to cart"
+                        onPress={()=> cart.setProducts(this.props.product)}
+                    />         
+                    </View>              
+                    <Button
+                        color="#760DF4"
+                        title="Purchase"
+                        onPress={()=>this.purchaseProduct(this.props.product)}
+                    />                           
+                </View>);
+            }else{
+                return;
+            }
+        }
     render(){
         return(
-
-            <View style={styles.card}>
-                <Image style={styles.stretch} source={this.loadImage(this.props.product)}/>
-                <Text>{this.props.product.name}</Text>
-                <Text>{this.props.product.price}</Text>
-                <Text>{this.props.product.score}</Text>
+            <View style={styles.container}>
+                <View style={styles.product}>
+                    <Image style={styles.image} source={this.loadImage(this.props.product)}/>
+                    <View style={styles.card}>        
+                            <Text style={styles.text}>{this.props.product.name}</Text>
+                            <Text style={styles.text}>Price: {this.props.product.price}</Text>
+                            <Text style={styles.text}>Score: {this.props.product.score}</Text>            
+                    </View>
+                </View>
+                    {this.loadButtonGroup()}
+                  
+               
             </View>
         );
     }

@@ -27,7 +27,7 @@ class Cart {
              productsAux.push(product);
          
          }
-         console.log(this.products)
+
 
     }
 
@@ -77,10 +77,8 @@ class Cart {
         //Adiciona quantidade do produto
         index = this.products.indexOf(product);
         this.products[index].quantity++;
-        priceSubTotalAux = this.products[index].quantity * this.products[index].price;
-        this.products[index].priceSubTotal = priceSubTotalAux.toFixed(2);
-        console.log(this.products[index].quantity)
-        console.log( this.products[index].quantity * this.products[index].price)
+        this.products[index].priceSubTotal = this.products[index].quantity * this.products[index].price;
+
     }
     subQuantity(product){
         let index = 0;
@@ -89,8 +87,7 @@ class Cart {
         //Verifica se a quantidade de produtos e maior que 0, se for subtrai a quantidade.
         if(this.products[index].quantity > 1){
             this.products[index].quantity--;
-            priceSubTotalAux = this.products[index].quantity * this.products[index].price;
-            this.products[index].priceSubTotal = priceSubTotalAux.toFixed(2);
+            this.products[index].priceSubTotal = this.products[index].quantity * this.products[index].price;
         }else{
             return;
         }

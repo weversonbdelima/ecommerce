@@ -3,16 +3,38 @@ import { View, Image, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     shoppingCartProducts: {
-        height: 400
+        height: '80%'
+    },
+    card:{
+        backgroundColor: '#fff',
+        marginBottom: 40
     },
     shoppingCartDetails:{
-        marginBottom: 0,
-        backgroundColor: '#f0f',
+        backgroundColor: '#760DF4'
+        
     },
-    textTitle: {
+    titleText:{
+        fontSize: 32,
+        fontWeight: 'bold',
+        color: '#fff'
+    },
+    text:{
         fontSize: 24,
-        fontWeight: 'bold'
-    }
+        fontWeight: "bold",
+        color: '#760DF4',
+        marginTop: 10
+      },
+      textCartDetails:{
+        fontSize: 24,
+        fontWeight: "bold",
+        color: '#fff',
+        marginTop: 10
+      },
+      buttonGroup:{
+          display:"flex",
+          flexDirection: "row",
+          justifyContent: 'space-between',
+      }
 
     
   });

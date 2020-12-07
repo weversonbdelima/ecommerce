@@ -78,36 +78,42 @@ class Checkout extends React.Component{
     loadCart(){
         if(this.state.cart.length === 0){
             return (
-                <Text>Shoppig cart is empty</Text>
+                <Text style={styles.text}>Shoppig cart is empty</Text>
             );
         }else{
             return (
-                <View>
+                <View style={{backgroundColor: '#fff'}}>
                     <ScrollView style={styles.shoppingCartProducts}>
                         {this.state.cart.map(product => 
-                            <View>
-                            <Product product={product}/>
-                            <Text>Quantity: {product.quantity}</Text>
-                            <Text>Subtotal price: {product.priceSubTotal}</Text>
-                            <Button
-                                title="Add quantity"
-                                onPress={()=>this.onPressAddQuantityProduct(product)}
-                            />  
-                            <Button
-                                title="Sub quantity"
-                                onPress={()=>this.onPressSubQuantityProduct(product)}
-                            />  
-                            <Button
-                                title="Delete to cart"
-                                onPress={()=>this.onPressRemoveProduct(product)}
-                            />                                    
+                            <View style={styles.card}>
+                            <Product product={product} cart={true}/>
+                            <Text style={styles.text}>Quantity: {product.quantity}</Text>
+                            <Text style={styles.text}>Subtotal price: {product.priceSubTotal}</Text>
+                            
+                            <View style={styles.buttonGroup}>
+                                <Button
+                                    color="#760DF4"
+                                    title="Add quantity"
+                                    onPress={()=>this.onPressAddQuantityProduct(product)}
+                                />  
+                                <Button
+                                    color="#760DF4"
+                                    title="Sub quantity"
+                                    onPress={()=>this.onPressSubQuantityProduct(product)}
+                                />  
+                                <Button
+                                    color="#760DF4"
+                                    title="Delete to cart"
+                                    onPress={()=>this.onPressRemoveProduct(product)}
+                                />                                    
+                                </View>
                             </View>
                         )}
                     </ScrollView>
-                    <View styles={styles.shoppingCartDetails}>
-                        <Text>Shopping details</Text>
-                        <Text>Total price: {this.state.totalPrice}</Text>
-                        <Text>Shipping: {this.state.shipping}</Text>
+                    <View style={styles.shoppingCartDetails}>
+                        <Text style={styles.textCartDetails}>Shopping details</Text>
+                        <Text style={styles.textCartDetails}>Total price: {this.state.totalPrice}</Text>
+                        <Text style={styles.textCartDetails}>Shipping: {this.state.shipping}</Text>
                     </View>
                 </View>
             )
@@ -117,10 +123,7 @@ class Checkout extends React.Component{
     render(){
         return(
             <View> 
-                    <Text style={styles.textTitle}>Shopping Cart</Text>
-                <View>
                     {this.loadCart()}
-                </View>
             </View>
         )
     }

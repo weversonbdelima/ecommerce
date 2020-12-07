@@ -18,9 +18,30 @@ export default function App() {
   return (
     <NavigationContainer>
         <Stack.Navigator initialRouteName="Shopping">
-          <Stack.Screen name="Shopping" component={Shopping}/>
-          <Stack.Screen name="Checkout" component={Checkout}/>
-
+          <Stack.Screen name="Shopping" component={Shopping} options={{
+          title: 'Shopping',
+          headerStyle: {
+            backgroundColor: '#760DF4',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            fontSize: 32
+          },
+          
+        }}/>
+          <Stack.Screen name="Checkout" component={Checkout} options={{
+          title: 'Checkout',
+          headerStyle: {
+            backgroundColor: '#760DF4',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            fontSize: 32
+          },
+          
+        }}/>
         </Stack.Navigator>
     </NavigationContainer>
   );

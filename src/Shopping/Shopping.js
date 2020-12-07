@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, ScrollView, TextInput,Picker, Button} from 'react-native';
+import { View, ScrollView, TextInput,Picker, Text, Button, Image} from 'react-native';
 
 import Products from '../products.json';
 import Product from '../Product/Product'
@@ -86,50 +86,39 @@ class Shopping extends React.Component{
     }
 
 
-    purchaseProduct(product){
-        //Adiciona o produto ao carrinho
-    //    this.addProductCart(product);
-        //Redirenciona para a rota de checkout
-        this.props.navigation.navigate('Checkout', {cart: this.state.cart});
-        
-    }
+    
 
     render(){
         return(
-            <View>
-                <View>
+            <View >
+                <View style={styles.header}>
                     <TextInput
                     style={styles.textInput}
                         onChangeText={ search => this.onChangeSearch(search)}
+                        placeholder="search"
                     />
-                    <Picker
-                        selectedValue={this.state.selectedValue}
-                        style={styles.picker}
-                        onValueChange={(productValue, productIndex) => this.setSelectdValueOrder(productValue)}
-                    >
-                        <Picker.Item label="Price" value="price"/>
-                        <Picker.Item label="Score" value="score"/>
-                        <Picker.Item label="Alphabetical Order" value="alphabeticalOrder"/>
-                    </Picker>
+                   <Text style={styles.text}>Order: </Text>
+                    <View style={styles.selected}>               
+                        <Picker
+                            selectedValue={this.state.selectedValue}
+                            style={styles.picker}
+                            onValueChange={(productValue, productIndex) => this.setSelectdValueOrder(productValue)}
+                        >
+                            <Picker.Item label="Price" value="price"/>
+                            <Picker.Item label="Score" value="score"/>
+                            <Picker.Item label="Alphabetical Order" value="alphabeticalOrder"/>
+                        </Picker>
+                    </View>
 
                 </View>            
-                <ScrollView>
+                <ScrollView style={styles.container} centerContent={true}>
                             {this.state.products.map(product => 
-                                <View>
-                                    <Product product={product}/>
-                                    <Button
-                                        title="Add to cart"
-                                        onPress={()=> cart.setProducts(product)}
-                                    />
-                                    <Button
-                                        title="Purchase"
-                                        onPress={()=>this.purchaseProduct(product)}
-                                    />
+                                <View style={styles.card}>
+                                    <Product product={product} navigation={this.props.navigation}/>
                                 </View>
                             )}
                 </ScrollView>
             </View>
-
         );
     }
 }
